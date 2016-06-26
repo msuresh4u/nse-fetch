@@ -1,7 +1,7 @@
 nse-fetch
 ====
 
-NSE-FETCH is a web-scraping library for Java that provides an API to fetch stock/share/Nifty50 data from the nseindia website.
+nse-fetch is a web-scraping library for Java that provides an API to fetch stock/share/Nifty50 data from the nseindia website.
 
 It can get data of an individual stock,show the top gainers/losers in NIFTY50 ,and also list the NIFTY50 stocks with open=high and open=low.
 
@@ -14,9 +14,9 @@ Oracle Java 8.
 Licensing
 ---------
 
-NSE-FETCH is released under the terms of the MIT License (MIT).
+nse-fetch is released under the terms of the MIT License (MIT).
 
-You are free to use Ui4j or any of its constituent parts in any other project (even commercial projects) so long as its copyright headers are left intact.
+You are free to use nse-fetch or any of its constituent parts in any other project (even commercial projects) so long as its copyright headers are left intact.
 
 Stability
 ---------
@@ -29,93 +29,76 @@ If you have found a defect or you want to request a feature enhancement an issue
 Usage Examples
 --------------
 
-Here is a very basic sample program that uses Ui4j to display a web page with a "hello, world!" message. See the [ui4j-sample](https://github.com/ui4j/ui4j/tree/master/ui4j-sample/src/main/java/com/ui4j/sample) project for more sample code snippets.
+Here is a very basic sample program that uses nse-fetch to obtain details of Infosys(INFY).
+
+The getStockDetails(String symbol) method returns a HashMap, and the various data entries can be accessed as follows.
+
+Note:- All values returned are Strings,use Double.parseDouble(String value) to convert.
+
 
 ```java
-package com.ui4j.sample;
+import com.rishabhk.nsefetch.Nse;
+import java.util.HashMap;
 
-import com.ui4j.api.browser.BrowserEngine;
-import com.ui4j.api.browser.BrowserFactory;
-import com.ui4j.api.browser.Page;
+public class Example1 {
 
-public class HelloWorld {
+    public static void main(String[] args){
+        Nse nse = new Nse();
+        
+        HashMap<String,String> hashMap = nse.getStockDetails("ONGC");
 
-    public static void main(String[] args) {
-        // get the instance of the webkit
-        BrowserEngine browser = BrowserFactory.getWebKit();
-
-        // navigate to blank page
-        Page page = browser.navigate("about:blank");
-
-        // show the browser page
-        page.show();
-
-        // append html header to the document body
-        page.getDocument().getBody().append("<h1>Hello, World!</h1>");
+        System.out.println(hashMap.get(Nse.LAST_TRADED_PRICE));
+        System.out.println(hashMap.get(Nse.PREVIOUS_CLOSE));
+        System.out.println(hashMap.get(Nse.OPEN));
+        System.out.println(hashMap.get(Nse.HIGH));
+        System.out.println(hashMap.get(Nse.LOW));
+        System.out.println(hashMap.get(Nse.CLOSE));
+        
+        nse.close();
     }
 }
 ```
 
-Here is another sampe code that list all front page news from Hacker News.
+Here is another sampe code that displays and returns an array of hash map containing top 10 gainers of NIFTY50.
+
+Use showAndGetTopLosersNifty50() for top 10 losers of NIFTY50.
 
 ```java
-package com.ui4j.sample;
+import com.rishabhk.nsefetch.Nse;
+import java.util.HashMap;
 
-import static com.ui4j.api.browser.BrowserFactory.getWebKit;
+public class Example1 {
 
-import com.ui4j.api.browser.Page;
-
-public class HackerNews {
-
-    public static void main(String[] args) {
-
-        try (Page page = getWebKit().navigate("https://news.ycombinator.com")) {
-            page
-                .getDocument()
-                .queryAll(".title a")
-                .forEach(e -> {
-                    System.out.println(e.getText().get());
-                });
-        }
+    public static void main(String[] args){
+        Nse nse = new Nse();
+        
+        HashMap<String,String>[] topLosers = nse.showAndGetTopGainersNifty50();
+        
+        System.out.println(topLosers[1].get("symbol"));//Get symbol of the biggest gainer.
+        System.out.println(topLosers[2].get(Nse.LAST_TRADED_PRICE));//Get LTP of the 2nd biggest gainer.
+        
+        nse.close();
     }
 }
 ```
 
-Building Ui4j
--------------
-mvn install
+Another method that shows the stocks with Open=Low and Open=High for the day.
 
-Getting help and getting involved
----------------------------------
+```java
+import com.rishabhk.nsefetch.Nse;
+import java.util.HashMap;
 
-Please do not hesitate to submit pull requests.
-We are happy to accept documentation and sample code contributions.
+public class Example1 {
 
-FAQ
----
-
-#### How can i set the user agent string?
-
-See [UserAgent.java](https://github.com/ui4j/ui4j/blob/master/ui4j-sample/src/main/java/com/ui4j/sample/UserAgent.java) sample.
-
-#### How can i execute javascript?
-
-See [JavaScriptExecution.java](https://github.com/ui4j/ui4j/blob/master/ui4j-sample/src/main/java/com/ui4j/sample/JavaScriptExecution.java) sample.
-
-#### How can i handle browser login, prompt or confirmation dialog?
-
-See [DialogTest.java](https://github.com/ui4j/ui4j/blob/master/ui4j-webkit/src/test/java/com/ui4j/test/DialogTest.java) for custom handlers or
-use default handlers from [Dialogs.java](https://github.com/ui4j/ui4j/blob/master/ui4j-api/src/main/java/com/ui4j/api/dialog/Dialogs.java).
-
-#### What is the easiest way clear all input elements?
-
-Use [clear](https://github.com/ui4j/ui4j/blob/master/ui4j-api/src/main/java/com/ui4j/api/dom/Form.java#L13) method of the Form class.
-
-Donations
----------
-Donations are accepted via Amazon.
-
-[Ui4j Amazon Wishlist](https://www.amazon.com/registry/wishlist/1IPPMT8VAXN2F)
+    public static void main(String[] args){
+        Nse nse = new Nse();
+        
+        nse.showOpenEqualsHighLow();
+        
+        nse.close();
+    }
+}
+```
 
 
 
