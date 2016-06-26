@@ -32,7 +32,7 @@ The jar can be downloaded from the following link :-
 
 https://sourceforge.net/projects/nse-fetch/files/latest/download
 
-Add it as project dependecy/library to your project to use.
+Add it as project dependency/library to your project to use.
 
 
 Usage Examples
@@ -112,6 +112,7 @@ public class Example1 {
 Libraries Used
 ---------
 [ui4j](https://github.com/ui4j/ui4j)
+
 [jsoup](https://jsoup.org/)
 
 
