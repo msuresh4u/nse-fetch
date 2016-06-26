@@ -109,9 +109,10 @@ public class Example1 {
 }
 ```
 
-Credits
+Libraries Used
 ---------
 [ui4j](https://github.com/ui4j/ui4j)
+[jsoup](https://jsoup.org/)
 
 
 
