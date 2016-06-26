@@ -29,7 +29,7 @@ If you have found a defect or you want to request a feature enhancement an issue
 Usage Examples
 --------------
 
-Here is a very basic sample program that uses nse-fetch to obtain details of Infosys(INFY).
+Here is a sample program that uses nse-fetch to obtain details of Infosys(INFY).
 
 The getStockDetails(String symbol) method returns a HashMap, and the various data entries can be accessed as follows.
 
@@ -45,7 +45,7 @@ public class Example1 {
     public static void main(String[] args){
         Nse nse = new Nse();
         
-        HashMap<String,String> hashMap = nse.getStockDetails("ONGC");
+        HashMap<String,String> hashMap = nse.getStockDetails("INFY");
 
         System.out.println(hashMap.get(Nse.LAST_TRADED_PRICE));
         System.out.println(hashMap.get(Nse.PREVIOUS_CLOSE));
@@ -72,10 +72,10 @@ public class Example1 {
     public static void main(String[] args){
         Nse nse = new Nse();
         
-        HashMap<String,String>[] topLosers = nse.showAndGetTopGainersNifty50();
+        HashMap<String,String>[] topGainers = nse.showAndGetTopGainersNifty50();
         
-        System.out.println(topLosers[1].get("symbol"));//Get symbol of the biggest gainer.
-        System.out.println(topLosers[2].get(Nse.LAST_TRADED_PRICE));//Get LTP of the 2nd biggest gainer.
+        System.out.println(topGainers[1].get("symbol"));//Get symbol of the biggest gainer.
+        System.out.println(topGainers[2].get(Nse.LAST_TRADED_PRICE));//Get LTP of the 2nd biggest gainer.
         
         nse.close();
     }
