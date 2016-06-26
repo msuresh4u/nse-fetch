@@ -26,6 +26,15 @@ This library is currently in beta.
 If you have found a defect or you want to request a feature enhancement an issue report is the way to bring it to my attention.
 
 
+Download
+---------
+The jar can be downloaded from the following link :-
+
+https://sourceforge.net/projects/nse-fetch/files/latest/download
+
+Add it as project dependecy/library to your project to use.
+
+
 Usage Examples
 --------------
 
@@ -99,6 +108,10 @@ public class Example1 {
     }
 }
 ```
+
+Credits
+---------
+[ui4j](https://github.com/ui4j/ui4j)
 
 
 
