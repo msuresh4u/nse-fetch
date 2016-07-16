@@ -76,7 +76,7 @@ Use showAndGetTopLosersNifty50() for top 10 losers of NIFTY50.
 import com.rishabhk.nsefetch.Nse;
 import java.util.HashMap;
 
-public class Example1 {
+public class Example2 {
 
     public static void main(String[] args){
         Nse nse = new Nse();
@@ -97,7 +97,7 @@ Another method that shows the stocks with Open=Low and Open=High for the day.
 import com.rishabhk.nsefetch.Nse;
 import java.util.HashMap;
 
-public class Example1 {
+public class Example3 {
 
     public static void main(String[] args){
         Nse nse = new Nse();
